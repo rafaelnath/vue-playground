@@ -44,6 +44,9 @@ export const store = new Vuex.Store({
           type:'info',
           html:'in <strong></strong> seconds',
           timer:2000,
+          customClass:{
+            background: 'theColor',
+          },
           showConfirmButton:false,
           onBeforeOpen:()=>{
             Swal.showLoading()
