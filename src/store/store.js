@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Swal from 'sweetalert2';
 
 Vue.use(Vuex);
 
@@ -37,6 +38,27 @@ export const store = new Vuex.Store({
         setTimeout(function(){
           context.commit('reducePrice',payload); //comitting a reducePrice mutation
         },2000)
+        var timerInterval = null;
+        Swal.fire({
+          title:'updating price...',
+          type:'info',
+          html:'in <strong></strong> seconds',
+          timer:2000,
+          showConfirmButton:false,
+          onBeforeOpen:()=>{
+            Swal.showLoading()
+            timerInterval = setInterval(()=>{
+              Swal.getContent().querySelector('strong').textContent = (Swal.getTimerLeft() / 1000).toFixed(0)
+            },100)
+          },
+          onClose:()=>{
+            clearInterval(timerInterval)
+          }
+        }).then((result) =>{
+            if(result.dismiss == Swal.DismissReason.timer){
+              console.log('closed by Timer');
+            }
+        })
     }
   }
 })
