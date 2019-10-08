@@ -16,7 +16,7 @@
 import {mapGetters} from 'vuex';
 import {mapActions} from 'vuex';
 import Swal from 'sweetalert2';
-import {Toast} from '../main';
+import {Toast} from '../../main';
 
 
 
